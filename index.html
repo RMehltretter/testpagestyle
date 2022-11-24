@@ -18,33 +18,62 @@
     </script>
     <!-- End Google Analytics -->
 
-    <!-- Facebook Pixel starten -->
-<script data-usercentrics="Facebook Pixel" type="text/plain">
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '{your-pixel-id-goes-here}');
-  fbq('track', 'PageView');
-</script>
-<noscript>
-  <img height="1" width="1" style="display:none" 
-       src="https://www.facebook.com/tr?id={your-pixel-id-goes-here}&ev=PageView&noscript=1"/>
-</noscript>
-<!-- End Facebook Pixel Code -->  
+   <!-- Facebook Pixel starten -->
+	<script data-usercentrics="Facebook Pixel" type="text/plain">
+		function mediameetsFacebookPixelStartOnWindowLoaded (callback) {
+			if (document.readyState === "complete") {
+				callback();
+			} else {
+				window.addEventListener("load", callback);
+			}
+		}
 
-<!-- BEGIN Usercentrics related code -->
+		mediameetsFacebookPixelStartOnWindowLoaded(function () {
+			var instances = PluginManager.getPluginInstances("mediameetsFacebookPixel");
+
+			if (typeof instances !== "object") {
+				return;
+			}
+
+			instances.forEach(function (instance) {
+				if (typeof instance.start !== "function") {
+					return;
+				}
+
+				instance.start();
+			});
+		});
+	</script>
+	<!-- End Facebook Pixel starten -->
+ 
+  
+    <!-- BEGIN Usercentrics related code -->
     <link rel="preconnect" href="//app.usercentrics.eu">
+    <link rel="preconnect" href="//api.usercentrics.eu">
     <link rel="preconnect" href="//privacy-proxy.usercentrics.eu">
     <link rel="preload" href="//app.usercentrics.eu/browser-ui/latest/loader.js" as="script">
     <link rel="preload" href="//privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js" as="script">
-    <script id="usercentrics-cmp" src="https://app.usercentrics.eu/browser-ui/latest/loader.js" data-settings-id="oaBxFKd6C" async></script>
+    <script id="usercentrics-cmp" data-settings-id="oaBxFKd6C" src="https://app.usercentrics.eu/browser-ui/latest/loader.js" async></script>
     <script type="application/javascript" src="https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js"></script>
-    <!-- END Usercentrics related code -->
+
+	<script>
+
+		// (optional) additional configs for the Smart Data Protector 
+      	//  uc.reloadOnOptIn('BJz7qNsdj-7'); // reload page on YouTube opt-in
+
+	    uc.setCustomTranslations({
+	       en: {
+	        ACCEPT: "Akzeptieren",
+	        VIDEO_DESCRIPTION: "Wir verwenden einen Dienst eines Drittanbieters, um Videoinhalte einzubetten, die Daten über Ihre Aktivitäten sammeln können. Bitte prüfen Sie die Details und akzeptieren Sie den Dienst, um dieses Video anzusehen.",
+	        DEFAULT_TITLE: "Wir benötigen Ihre Zustimmung, um den YouTube Video-Dienst zu laden!",
+	        MORE_INFO: "Mehr Informationen",
+	        POWERED_BY: "Angetrieben durch Usercentrics Consent Management"
+	      }
+	    });
+	</script>    
+ 
+
+
     
     
     <script type="application/javascript" src="https://app.usercentrics.eu/latest/main.js" id="oaBxFKd6C" async></script>

@@ -22,16 +22,38 @@
     </script>
     <!-- End Google Analytics -->
 
-    <!-- Google Tag Manager -->
-    <script type ="text/plain" data-usercentrics="Google Tag Manager">(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-MW6SFJV');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Facebook Pixel starten -->
+	<script data-usercentrics="Facebook Pixel" type="text/plain">
+		function mediameetsFacebookPixelStartOnWindowLoaded (callback) {
+			if (document.readyState === "complete") {
+				callback();
+			} else {
+				window.addEventListener("load", callback);
+			}
+		}
+
+		mediameetsFacebookPixelStartOnWindowLoaded(function () {
+			var instances = PluginManager.getPluginInstances("mediameetsFacebookPixel");
+
+			if (typeof instances !== "object") {
+				return;
+			}
+
+			instances.forEach(function (instance) {
+				if (typeof instance.start !== "function") {
+					return;
+				}
+
+				instance.start();
+			});
+		});
+	</script>
+	<!-- End Facebook Pixel starten -->
+    
+    <!-- Usercentrics -->
+    <script id="usercentrics-cmp" src="https://app.usercentrics.eu/browser-ui/latest/loader.js" data-settings-id="oaBxFKd6C" async></script>
+    <!-- End Usercentrics -->
+    
 </head>
 
 <body>
